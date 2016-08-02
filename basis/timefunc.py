@@ -4,7 +4,7 @@ Created on Tue Aug 02 20:51:00 2016
 
 @author: gdpan
 """
-import time
+from matplotlib.dates import num2date
 
-def epochDate2Date(epoch):
-    return time.strftime("%Y-%m-%d", time.localtime(epoch))
+def epochDate2Date(datenum):
+    return num2date(datenum)

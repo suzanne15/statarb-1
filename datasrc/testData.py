@@ -9,14 +9,18 @@ from inc import financeMeta
 from datasrc import getDataFile
 from basis.io import loadComponent, loadData
 import matplotlib.pyplot as plt
-from basis.timefunc import epochDate2Date
+from matplotlib.dates import num2date
 
 symbol_list = loadComponent(financeMeta)
 symData = dict()
+plt.figure(figsize=(50, 30), dpi = 200)
 for symbol in symbol_list:
     filename = getDataFile(symbol)
     symData[symbol] = loadData(filename)
     ts, clp = symData[symbol].getTimeAndReturn()
-    ts = map(epochDate2Date, ts)
+    ts = map(num2date, ts)
+    plt.xticks(ts)
     plt.plot(ts, clp)
+    print("Finish %s" % symbol)
     
+plt.savefig("testDate.png")
